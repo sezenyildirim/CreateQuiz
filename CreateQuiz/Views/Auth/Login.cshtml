@@ -1,0 +1,23 @@
+﻿<div class="container">
+	<div class="col-md-4 offset-4">
+		<h2>Kullanıcı Girişi</h2>
+		@if (TempData["errors"] != null)
+		{
+			<p class="alert alert-danger">@TempData["errors"]</p>
+
+		}
+		<form action="/Auth/Login" method="post">
+		<div class="form-group">
+			<input class="form-control" required minLength="3" name="userName" placeholder="Kullanıcı Adı" value=@TempData["userName"]/>
+		</div>
+
+		<div class="form-group mt-2">
+			<input class="form-control" required minLength="3" type="password" name="password" placeholder="Şifre" value=@TempData["password"]/>
+		</div>
+
+		<div class="form-group mt-2">
+			<button class="btn btn-primary w-100">Giriş Yap</button>
+		</div>
+		</form>
+	</div>
+</div>

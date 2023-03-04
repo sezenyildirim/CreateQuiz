@@ -1,0 +1,292 @@
+﻿@model Quiz
+@{
+	string question = "";
+	string answerA = "";
+	string answerB = "";
+	string answerC = "";
+	string answerD = "";
+
+	string formAID = "";
+	string formBID = "";
+	string formCID = "";
+	string formDID = "";
+	string answerAID = "";
+	string answerBID = "";
+	string answerCID = "";
+	string answerDID = "";
+
+}
+<div class="container mt-4">
+	@*<form>*@
+	<h1 class="text-center">@Model.Title</h1>
+	<p>@Model.Description</p>
+	<hr />
+	<div class="row">
+		<input value="@Model.ID" id="quizID" type="hidden" />
+		@for (int i = 0; i < 4; i++)
+		{
+			if (i == 0)
+			{
+				question = Model.Question1;
+				answerA = Model.Answer1A;
+				answerB = Model.Answer1B;
+				answerC = Model.Answer1C;
+				answerD = Model.Answer1D;
+				formID = "form" + (i + 1) + "A";
+				answerAID = "answer" + (i + 1) + "A";
+				answerBID = "answer" + (i + 1) + "B";
+				answerCID = "answer" + (i + 1) + "C";
+				answerDID = "answer" + (i + 1) + "D";
+			}
+
+			else if (i == 1)
+			{
+				question = Model.Question2;
+				answerA = Model.Answer2A;
+				answerB = Model.Answer2B;
+				answerC = Model.Answer2C;
+				answerD = Model.Answer2D;
+				formAID = "form" + (i + 1) + "A";
+				formBID = "form" + (i + 1) + "B";
+				formCID = "form" + (i + 1) + "C";
+				formDID = "form" + (i + 1) + "D";
+				answerAID = "answer" + (i + 1) + "A";
+				answerBID = "answer" + (i + 1) + "B";
+				answerCID = "answer" + (i + 1) + "C";
+				answerDID = "answer" + (i + 1) + "D";
+			}
+
+			else if (i == 2)
+			{
+				question = Model.Question3;
+				answerA = Model.Answer3A;
+				answerB = Model.Answer3B;
+				answerC = Model.Answer3C;
+				answerD = Model.Answer3D;
+				formAID = "form" + (i + 1) + "A";
+				formBID = "form" + (i + 1) + "B";
+				formCID = "form" + (i + 1) + "C";
+				formDID = "form" + (i + 1) + "D";
+				answerAID = "answer" + (i + 1) + "A";
+				answerBID = "answer" + (i + 1) + "B";
+				answerCID = "answer" + (i + 1) + "C";
+				answerDID = "answer" + (i + 1) + "D";
+			}
+			else if (i == 3)
+			{
+				question = Model.Question4;
+				answerA = Model.Answer4A;
+				answerB = Model.Answer4B;
+				answerC = Model.Answer4C;
+				answerD = Model.Answer4D;
+				formAID = "form" + (i + 1) + "A";
+				formBID = "form" + (i + 1) + "B";
+				formCID = "form" + (i + 1) + "C";
+				formDID = "form" + (i + 1) + "D";
+				answerAID = "answer" + (i + 1) + "A";
+				answerBID = "answer" + (i + 1) + "B";
+				answerCID = "answer" + (i + 1) + "C";
+				answerDID = "answer" + (i + 1) + "D";
+			}
+			<div class="col-md-6 form-group mt-2">
+				<label>1.) @question</label>
+
+				<div class="form-check" id="@formAID">
+					<input class="form-check-input " type="radio" name="@answerAID" id="@answerAID">
+					<label class="form-check-label" for="@answerAID">
+						@answerA
+					</label>
+				</div>
+
+
+
+				<div class="form-check" id="@formBID">
+					<input class="form-check-input " type="radio" name="@answerBID" id="@answerBID">
+					<label class="form-check-label" for="@answerBID">
+						@answerB
+					</label>
+				</div>
+
+
+
+				<div class="form-check" id="@formCID">
+					<input class="form-check-input" type="radio" name="@answerCID" id="@answerCID">
+					<label class="form-check-label" for="@answerCID">
+						@answerC
+					</label>
+				</div>
+
+
+
+				<div class="form-check" id="@formDID">
+					<input class="form-check-input" type="radio" name="@answerDID" id="@answerDID">
+					<label class="form-check-label" for="@answerDID">
+						@answerD
+					</label>
+				</div>
+			</div>
+		}
+
+
+
+	</div>
+	<div class="col-md-4 offset-4 mt-4">
+		<button class="btn btn-success w-100" onclick="checkAnswer()">Sınavı Bitir</button>
+	</div>
+	@*</form>*@
+</div>
+<style>
+	.form-check {
+		border: 1px solid;
+	}
+
+	.correct {
+		background-color: forestgreen;
+		color: white;
+		font-weight: 700;
+	}
+
+	.wrong {
+		background-color: red;
+		color: white;
+		font-weight: 700;
+	}
+</style>
+<script>
+	function checkAnswer(){
+		let answer1="";
+		let answer1ID="";
+		let answer2="";
+		let answer2ID="";
+		let answer3="";
+		let answer3ID="";
+		let answer4="";
+		let answer4ID="";
+		let quizID = $("#quizID").InnerText;
+		var url = '@Url.Action("CheckAnswer","Quiz")';
+		if($("answer1A:checked").val() != undefined){
+			answer1 = "A",
+			answer1ID="form1A"
+		}
+		else if($("answer1B:checked").val() != undefined){
+				answer1 = "B",
+					answer1ID="form1B"
+		}
+			else if($("answer1C:checked").val() != undefined){
+				answer1 = "C",
+					answer1ID="form1C"
+		}
+			else if($("answer1D:checked").val() != undefined){
+				answer1 = "D",
+					answer1ID="form1D"
+		}
+
+		//2.cevap
+				if($("answer2A:checked").val() != undefined){
+			answer2 = "A",
+			answer2ID="form2A"
+		}
+		else if($("answer2B:checked").val() != undefined){
+				answer2 = "B",
+				answer2ID="form2B"
+		}
+			else if($("answer2C:checked").val() != undefined){
+				answer2 = "C"
+		}
+			else if($("answer2D:checked").val() != undefined){
+				answer1 = "D"
+		}
+
+		//3.cevap
+
+						if($("answer3A:checked").val() != undefined){
+			answer3 = "A",
+			answer3ID="form3A"
+		}
+		else if($("answer3B:checked").val() != undefined){
+				answer3 = "B",
+			answer3ID="form3B"
+
+		}
+			else if($("answer3C:checked").val() != undefined){
+				answer3 = "C",
+			answer3ID="form3C"
+
+		}
+			else if($("answer3D:checked").val() != undefined){
+				answer1 = "D",
+			answer3ID="form3D"
+
+		}
+		//4.cevap
+		if($("answer4A:checked").val() != undefined){
+			answer4 = "A",
+			answer4ID="form4A"
+
+		}
+		else if($("answer4B:checked").val() != undefined){
+				answer4 = "B",
+			answer4ID="form4B"
+
+		}
+			else if($("answer4C:checked").val() != undefined){
+				answer4 = "C",
+			answer4ID="form4C"
+
+		}
+			else if($("answer4D:checked").val() != undefined){
+				answer1 = "D",
+			answer4ID="form4D"
+
+		}
+
+		$.ajax({
+			data:{
+				quizID:quizID,
+				answer1:answer1,
+				answer2:answer2,
+				answer3:answer3,
+				answer4:answer4,
+			},
+			url:url,
+			type:'GET',
+			success:function(response){
+				console.log(response)
+				if(response.answer1 == true){
+					document.getElementById(answer1ID).setAttribute("class","form-check correct")
+				}
+				else if(response.answer1 == false){
+					document.getElementById(answer1ID).setAttribute("class","form-check wrong")
+
+				}
+				if(response.answer2 == true){
+					document.getElementById(answer2ID).setAttribute("class","form-check correct")
+				}
+				else if(response.answer2 == false){
+					document.getElementById(answer2ID).setAttribute("class","form-check wrong")
+
+				}
+
+				if(response.answer3 == true){
+					document.getElementById(answer3ID).setAttribute("class","form-check correct")
+				}
+				else if(response.answer3 == false){
+					document.getElementById(answer3ID).setAttribute("class","form-check wrong")
+
+				}
+
+				if(response.answer4 == true){
+					document.getElementById(answer4ID).setAttribute("class","form-check correct")
+				}
+				else if(response.answer4 == false){
+					document.getElementById(answer4ID).setAttribute("class","form-check wrong")
+
+				}
+			},
+			error:function(err){
+				console.log(err)
+			}
+		})
+
+	}
+</script>
