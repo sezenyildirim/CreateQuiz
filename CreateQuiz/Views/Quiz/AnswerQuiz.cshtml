@@ -32,7 +32,10 @@
 				answerB = Model.Answer1B;
 				answerC = Model.Answer1C;
 				answerD = Model.Answer1D;
-				formID = "form" + (i + 1) + "A";
+				formAID = "form" + (i + 1) + "A";
+				formBID = "form" + (i + 1) + "B";
+				formCID = "form" + (i + 1) + "C";
+				formDID = "form" + (i + 1) + "D";
 				answerAID = "answer" + (i + 1) + "A";
 				answerBID = "answer" + (i + 1) + "B";
 				answerCID = "answer" + (i + 1) + "C";
@@ -101,7 +104,7 @@
 
 
 				<div class="form-check" id="@formBID">
-					<input class="form-check-input " type="radio" name="@answerBID" id="@answerBID">
+					<input class="form-check-input " type="radio" name="@answerAID" id="@answerBID">
 					<label class="form-check-label" for="@answerBID">
 						@answerB
 					</label>
@@ -110,7 +113,7 @@
 
 
 				<div class="form-check" id="@formCID">
-					<input class="form-check-input" type="radio" name="@answerCID" id="@answerCID">
+					<input class="form-check-input" type="radio" name="@answerAID" id="@answerCID">
 					<label class="form-check-label" for="@answerCID">
 						@answerC
 					</label>
@@ -119,7 +122,7 @@
 
 
 				<div class="form-check" id="@formDID">
-					<input class="form-check-input" type="radio" name="@answerDID" id="@answerDID">
+					<input class="form-check-input" type="radio" name="@answerAID" id="@answerDID">
 					<label class="form-check-label" for="@answerDID">
 						@answerD
 					</label>
@@ -191,10 +194,14 @@
 				answer2ID="form2B"
 		}
 			else if($("answer2C:checked").val() != undefined){
-				answer2 = "C"
+				answer2 = "C",
+				answer2ID="form2C"
+
 		}
 			else if($("answer2D:checked").val() != undefined){
-				answer1 = "D"
+				answer1 = "D",
+				answer2ID="form2D"
+
 		}
 
 		//3.cevap
@@ -251,7 +258,7 @@
 			url:url,
 			type:'GET',
 			success:function(response){
-				console.log(response)
+				clearFormClass();
 				if(response.answer1 == true){
 					document.getElementById(answer1ID).setAttribute("class","form-check correct")
 				}
@@ -288,5 +295,32 @@
 			}
 		})
 
+	}
+
+	function clearFormClass(){
+		document.getElementById("form1A").setAttribute("class","form-check")
+		document.getElementById("form1B").setAttribute("class","form-check")
+		document.getElementById("form1C").setAttribute("class","form-check")
+		document.getElementById("form1D").setAttribute("class","form-check")
+
+
+		document.getElementById("form2A").setAttribute("class","form-check")
+		document.getElementById("form2B").setAttribute("class","form-check")
+		document.getElementById("form2C").setAttribute("class","form-check")
+		document.getElementById("form2D").setAttribute("class","form-check")
+
+
+
+		document.getElementById("form3A").setAttribute("class","form-check")
+		document.getElementById("form3B").setAttribute("class","form-check")
+		document.getElementById("form3C").setAttribute("class","form-check")
+		document.getElementById("form3D").setAttribute("class","form-check")
+
+		
+
+		document.getElementById("form4A").setAttribute("class","form-check")
+		document.getElementById("form4B").setAttribute("class","form-check")
+		document.getElementById("form4C").setAttribute("class","form-check")
+		document.getElementById("form4D").setAttribute("class","form-check")
 	}
 </script>

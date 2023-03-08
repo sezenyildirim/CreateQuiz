@@ -1,13 +1,18 @@
-﻿<div class="container mt-2">
+﻿@model List<string>
+
+<div class="container mt-2">
 	<form action="/Quiz/CreateNewQuiz" method="post">
 	<h3 class="alert alert-success">Yeni Soru Oluştur</h3>
 	<hr />
 	<div class="form-group mt-2">
 		<label for="title">Yazı</label>
 		<select id="title" name="title" class="form-control">
-			<option value="Deneme Başlık 1">Deneme Başlık 1</option>
-			<option value="Deneme Başlık 2">Deneme Başlık 2</option>
-			<option value="Deneme Başlık 3">Deneme Başlık 3</option>
+			@foreach(var item in Model)
+			{
+			<option value="@item">@item</option>
+
+			}
+
 		</select>
 	</div>
 

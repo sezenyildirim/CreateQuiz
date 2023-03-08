@@ -3,6 +3,8 @@ using CreateQuiz.DTOS;
 using CreateQuiz.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Text;
 
 namespace CreateQuiz.Controllers
 {
@@ -23,7 +25,17 @@ namespace CreateQuiz.Controllers
 
         public IActionResult CreateNewQuiz()
         {
-            return View();
+
+            string link = "http://www.wired.com/most-recent";
+            Uri url = new Uri(link);
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+            string html = client.DownloadString(url);
+            HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
+            document.LoadHtml(html);
+
+            var nodes = document.DocumentNode.Descendants("h3").Take(5).Select(s=>s.InnerHtml).ToList();
+            return View(nodes);
         }
 
         [HttpPost]
@@ -93,6 +105,9 @@ namespace CreateQuiz.Controllers
             }
             return Json(answerDTO);
         }
+
+
+
 
     }
 }
